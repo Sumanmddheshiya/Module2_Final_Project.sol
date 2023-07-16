@@ -217,7 +217,7 @@ This line inside the getCryptocurrency() function returns the value of the crypt
 
 ## Authors
 
-Khushi 
+Suman maddheshiya
 [sumanmaddheshiya@gmail.com]
 [21Bcs9924@cuchd.in]
 
