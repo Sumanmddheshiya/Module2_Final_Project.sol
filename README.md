@@ -1,226 +1,94 @@
-# SMART CONTRACT FRONTEND INTEGRATION
+# 🌐 Web3 Local Bank
 
-These codes execution and implemention will lead to the creation of a frontend which can be connected with crypto wallets like MetaMask. It contains functionality and its explanation in detail.
+> 💸 A Simple Web3 application for transferring Ether and personalizing your account. 
 
-## Description
+## Description 
 
-This project is implemented using three programming languages, i.e., html, javascript and solidity. html file here is used for designing the interface of the frontend. Javascript is used for dApp and ensuring that the user has an Ethereum compatible browser like MetaMask is installed or not. Solidity program here is used for deploying the required contract.
+This is an intuitive web3 application created using HTML, CSS, and Solidity. It leverages the power of Ethereum networks to provide a decentralized banking experience. With this dApp, users can easily deploy a contract and transfer Ether and personalize their account names. The application is built using Solidity smart contracts, the powerful Ethers.js library, and uses the user-friendly MetaMask wallet extension.
 
-## App.js file Explanation:
+---
 
-This code is written in JavaScript and is an implementation of a decentralized application (DApp) using the Ethereum blockchain. 
 
-## Getting Started
+## Technologies Used 🛠️
 
-### Executing program
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white)  ![Web3.js](https://img.shields.io/badge/web3.js-F16822?style=for-the-badge&logo=web3.js&logoColor=white)  ![Solidity](https://img.shields.io/badge/Solidity-%23363636.svg?style=for-the-badge&logo=solidity&logoColor=white)  ![Metamask](https://avatars.githubusercontent.com/u/11744586?s=48&v=4)  ![Hardhat](https://hardhat.org/_next/static/media/hardhat-logo.5c5f687b.svg)
 
-To run this program, I have used Visual Stdio Code. To save and execute this code I have used extension .js , example: fileName.js .
+This project utilizes the following technologies:
 
-```javascript
-window.addEventListener('load', async () => {
-```
+- **Solidity**: Solidity is a programming language specifically designed for writing smart contracts on the Ethereum platform. It is used to write the Bank smart contract in this project. [Learn more about Solidity](https://docs.soliditylang.org/).
 
-This code attaches an event listener to the load event of the window, which means it will run when the webpage finishes loading.
+- **Ethers.js**: Ethers.js is a JavaScript library that provides a concise and consistent API for interacting with Ethereum and Ethereum-like networks. It is used to interact with the Ethereum blockchain and execute transactions in this project. [Explore Ethers.js](https://docs.ethers.org/v5/).
 
-```javascript
-if (window.ethereum) {
-  window.web3 = new Web3(window.ethereum);
-  await window.ethereum.enable();
-}
-else if (window.web3) {
-  window.web3 = new Web3(window.web3.currentProvider);
-}
-else {
-  console.log('Non-Ethereum');
-}
-```
+- **MetaMask**: MetaMask is a popular browser extension wallet that allows users to manage Ethereum accounts and interact with decentralized applications. It is used to connect to the Ethereum network and perform transactions in this project. [Get MetaMask](https://metamask.io/).
 
-This section checks if the window.ethereum object is present, which indicates that the user has an Ethereum-compatible browser extension like MetaMask installed. If it is present, the code initializes the window.web3 object using the Web3 library and enables the Ethereum provider with await window.ethereum.enable(). If window.ethereum is not present but window.web3 is, it initializes window.web3 using the current provider. If neither is present, it logs "Non-Ethereum" to the console.
+- **Hardhat**: Hardhat is a development environment and testing framework for Ethereum smart contracts. It provides tools for compiling, deploying, and testing contracts. Hardhat is used to compile and deploy the Bank smart contract in this project. [Discover Hardhat](https://hardhat.org/).
 
-```javascript
-const contractABI = [
-  // Contract's ABI (Application Binary Interface) definition
-];    
-```
+Feel free to explore the provided links to learn more about each technology. 🚀
 
-This variable contractABI represents the Application Binary Interface (ABI) of a smart contract. The ABI is a JSON array that defines the structure and methods of the contract that you want to interact with. In this code, the ABI is not provided, but it should include the necessary information for interacting with the contract.
+## Installation ⬇️
 
-```javascript
-const contractAddress = '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4'; 
-```
+### Follow these steps to get the project up and running 🏗️
 
-This variable contractAddress represents the Ethereum address of the smart contract. The contractAddress value in the code is just a placeholder and should be replaced with the actual Ethereum address of the contract you want to interact with.
+1. Download or clone the project.
+2. Install the dependencies by running `npm install`.
+3. Start the local blockchain using Hardhat by running `npx hardhat node`.
+4. Open new terminal and deploy the Bank contract `npx hardhat run --network localhost scripts/deploy.js`.
+5. Start the development server by running `npm run dev`.
 
-```javascript
-const contractInstance = new web3.eth.Contract(contractABI, contractAddress);
-```
+### Configure MetaMask to use the Hardhat node 🦊
 
-This code creates an instance of the smart contract using the web3.eth.Contract constructor. It takes the contract ABI and contract address as arguments. The contractInstance variable represents the instance of the contract and will be used to interact with its methods.
+1. Open the MetaMask extension in your browser.
+2. Click on the account icon in the top right corner and select "Settings".
+3. In the "Networks" tab, click on "Add Network".
+4. Fill in the following details:
+   - Network Name: hardhat-test-network
+   - RPC URL: http://127.0.0.1:8545/
+   - Chain ID: 31337
+   - Currency Symbol: GO or ETH
+5. Click on "Save" to add the Hardhat network to MetaMask.
 
-```javascript
-window.incrementCryptocurrency = async () => {
-  await contractInstance.methods.incrementCryptocurrency().send({ from: web3.eth.defaultAccount });
-};
-```
+### Add accounts using private keys by Hardhat for testing 🔑
 
-This code defines a function incrementCryptocurrency on the window object. This function is an asynchronous function that calls the incrementCryptocurrency method of the smart contract. The send method is used to send a transaction to the contract, and the from field specifies the Ethereum account that will send the transaction. The web3.eth.defaultAccount represents the default Ethereum account selected by the user.
+1. In the MetaMask extension, click on the account icon in the top right corner.
+2. Select "Import Account" or "Import Account using Private Key" (depending on your version of MetaMask).
+3. In the "Private Key" field, enter one of the private keys provided by Hardhat.
+   - To access the list of private keys, open the terminal where you started the Hardhat local network.
+   - The private keys are displayed as part of the accounts generated by Hardhat.
+4. Click on "Import" to import the account into MetaMask.
+5. Repeat the above steps to add more accounts for testing purposes.
 
-```javascript
-window.getCryptocurrency = async () => {
-  const value = await contractInstance.methods.getCryptocurrency().call();
-  document.getElementById('currentValue').innerText = value;
-};
-```
+> If you need detailed instructions or visual guidance, you can refer to this step-by-step guide on [how to use MetaMask with a Hardhat node](https://support.chainstack.com/hc/en-us/articles/4408642503449-Using-MetaMask-with-a-Hardhat-node).
 
-This code defines a function getCryptocurrency on the window object. This function is also asynchronous and calls the getCryptocurrency method of the smart contract using the call method. The call method is used for reading data from the contract and does not require a transaction. The return value is stored in the value variable and then displayed in an HTML element with the ID 'currentValue'.
 
-## File.html file Explanation:
+## Usage 🪜
 
-This code is an HTML document that includes some JavaScript code for interacting with the Ethereum blockchain. 
+**To use the application, follow these instructions:**
 
-## Getting Started
+1. After connecting MetaMask to the Hardhat local network, connect your wallet with the application
+2. Click on Transfer Funds and fill in the recipient's address and the amount you want to transfer.
+3. Click the "Transfer" button to initiate the transaction.
+4. Confirm the transaction in MetaMask.
+5. The transaction details will be logged to the console, and the account balance will be updated.
 
-### Executing program
+**You can also personalize your account name:**
 
-To run this program, I have used Visual Stdio Code. To save and execute this code I have used extension .html , example: fileName.html .
+1. Enter a new name in the input field.
+2. Click the "Update Name" button to set the new account name.
+3. Confirm the transaction in MetaMask.
+4. The account name will be updated, and the change will be reflected in the account details.
 
-```html
-<!DOCTYPE html>:
-```
+## Contract Details 🔗
 
-This is the document type declaration that specifies that the document is an HTML file.
+The smart contract used in this project is named `Bank` present inside the `contracts/Bank.sol` file. It allows users to set an account name and transfer funds. The contract emits events for successful transfers and name updates.
 
-```html
-<html>:
-```
+## Configuration ⚙️
 
-This is the root element of the HTML document. All other elements will be contained within it.
+The `hardhat.config.js` file is used for configuring the Hardhat development environment. It specifies the Solidity version and required libraries to deploy contracts on the hardhat node.
 
-```html
-<head>:
-```
+## Scripts 📜
 
-This is the head section of the HTML document, which contains meta-information about the document, such as the title and external script files.
+The `deploy.js` script, located in the `scripts` folder, is used to deploy the Bank contract. It uses Hardhat's `ethers` library to interact with the blockchain. This script is executed with the `npx hardhat run` command.
 
-```html
-<title> ETHER TRANSACTIONS </title>:
-```
+---
 
-This line sets the title of the HTML document to "ETHER TRANSACTIONS". The title appears in the browser's title bar or tab.
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>:
-```
-
-This line includes an external JavaScript file from the specified URL. The script is web3.js, which is a popular JavaScript library for interacting with the Ethereum blockchain.
-
-```html
-<script src="app.js"></script>:
-```
-
-This line includes another JavaScript file called "app.js". It is assumed that there is a file named "app.js" in the same directory as this HTML file.
-
-```html
-<body>:
-```
-
-This is the body section of the HTML document. It contains the visible content of the web page.
-
-```html
-<h1> ETHER TRANSACTIONS </h1>:
-```
-
-This is a heading element that displays the text "ETHER TRANSACTIONS" as the main heading of the page.
-
-```html
-<div>:
-```
-
-This is a container element that groups related elements together.
-
-```html
-<button onclick="incrementCryptocurrency()">Increment Cryptocurrency</button>:
-```
-
-This line creates a button element with the text "Increment Cryptocurrency". The onclick attribute specifies a JavaScript function, incrementCryptocurrency(), which will be executed when the button is clicked.
- 
-```html
-<div id="valueContainer">:
-```
-
-This line creates another div element with the id attribute set to "valueContainer". The id attribute can be used to uniquely identify an element in the HTML document.
-
-```html
-<h2>Cryptocurrency Value: <span id="currentValue"></span></h2>:
-```
-
-This line creates a heading element (h2) with the text "Cryptocurrency Value: ". It also includes a span element with the id attribute set to "currentValue". The span element will be used to display the current value of the cryptocurrency. 
-
-```html
-<button onclick="getCryptocurrency()">Get Cryptocurrency Value</button>
-```
-
-This line creates a button element with the text "Get Cryptocurrency Value". Similar to the previous button, it has an onclick attribute that specifies a JavaScript function, getCryptocurrency(), to be executed when the button is clicked.
-
-## MyContract.sol file Explanation:
-
-This code is written in the Solidity Progamming Language.
-
-## Getting Started
-
-### Executing program
-
-To run this program, I have used online Remix IDE. To save and execute this code I have used extension .sol , example: fileName.sol . You can visit the Remix website at https://remix.ethereum.org/ .
-
-```solidity
-// SPDX-License-Identifier: MIT:
-pragma solidity ^0.8.0;
-```
-
-First statement is a comment specifying the license identifier for the contract. In this case, it indicates that the contract is licensed under the MIT license. Sexcond line specifies the version of Solidity that the contract is written in. In this case, it requires version 0.8.0 or higher.
-
-```solidity
-contract MyContract { ... }:
-```
-
-This line starts the declaration of the contract named MyContract. A contract in Solidity is similar to a class in object-oriented programming and represents a collection of state variables and functions.
-
-```solidity
-uint public cryptocurrency;
-```
-
-This line declares a public unsigned integer variable named cryptocurrency. The public modifier automatically generates a getter function for this variable, allowing other contracts or external entities to read its value.
-
-```solidity
-function incrementCryptocurrency() public { ... }:
-```
-
-This is a function declaration for incrementCryptocurrency(). It is a public function that does not return any value (void in some programming languages). When called, it increments the value of cryptocurrency by 1.
-
-```solidity
-cryptocurrency += 1;
-```
-
-This line increments the value of cryptocurrency by 1. The += operator is a shorthand for cryptocurrency = cryptocurrency + 1.
-
-```solidity
-function getCryptocurrency() public view returns (uint) { ... }
-```
-
-This is a function declaration for getCryptocurrency(). It is a public view function, which means it can be called externally and does not modify the contract's state. It returns the value of cryptocurrency as an unsigned integer.
-
-```solidity
-return cryptocurrency;
-```
-
-This line inside the getCryptocurrency() function returns the value of the cryptocurrency variable to the caller.
-
-## Authors
-
-Suman maddheshiya
-[sumanmaddheshiya@gmail.com]
-[21Bcs9924@cuchd.in]
-
-## License
-
-This project is licensed under the MIT License - see the License.md file for details.
+This project is open-source !😉
