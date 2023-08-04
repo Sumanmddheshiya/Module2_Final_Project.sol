@@ -1,94 +1,45 @@
-# 🌐 Web3 Local Bank
+# ETH_AVAX_Module2
 
-> 💸 A Simple Web3 application for transferring Ether and personalizing your account. 
+My Account 
 
-## Description 
+Create a simple contract with 2-3 functions. Then show the values of those functions in frontend of the application.
+License This contract is using the MIT License.
 
-This is an intuitive web3 application created using HTML, CSS, and Solidity. It leverages the power of Ethereum networks to provide a decentralized banking experience. With this dApp, users can easily deploy a contract and transfer Ether and personalize their account names. The application is built using Solidity smart contracts, the powerful Ethers.js library, and uses the user-friendly MetaMask wallet extension.
+Prerequisites Solidity ^0.8.0
 
----
+Contract Details 
 
+Assignment.sol
 
-## Technologies Used 🛠️
+The contract is defined with the name "SimpleContract" and specifies that it complies with the MIT license.
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white)  ![Web3.js](https://img.shields.io/badge/web3.js-F16822?style=for-the-badge&logo=web3.js&logoColor=white)  ![Solidity](https://img.shields.io/badge/Solidity-%23363636.svg?style=for-the-badge&logo=solidity&logoColor=white)  ![Metamask](https://avatars.githubusercontent.com/u/11744586?s=48&v=4)  ![Hardhat](https://hardhat.org/_next/static/media/hardhat-logo.5c5f687b.svg)
+The contract contains a private array variable called "names," which will store the names added by users. The "private" visibility modifier restricts direct access to this variable from outside the contract.
 
-This project utilizes the following technologies:
+The setName function allows users to add a new name to the "names" array. It takes a string parameter _name and appends it to the end of the array.
 
-- **Solidity**: Solidity is a programming language specifically designed for writing smart contracts on the Ethereum platform. It is used to write the Bank smart contract in this project. [Learn more about Solidity](https://docs.soliditylang.org/).
+The getAllNames function is a view function, meaning it does not modify the contract's state. It returns the complete list of names stored in the "names" array.
 
-- **Ethers.js**: Ethers.js is a JavaScript library that provides a concise and consistent API for interacting with Ethereum and Ethereum-like networks. It is used to interact with the Ethereum blockchain and execute transactions in this project. [Explore Ethers.js](https://docs.ethers.org/v5/).
+The reset function deletes all the names stored in the "names" array. It uses the delete keyword to clear the array.
 
-- **MetaMask**: MetaMask is a popular browser extension wallet that allows users to manage Ethereum accounts and interact with decentralized applications. It is used to connect to the Ethereum network and perform transactions in this project. [Get MetaMask](https://metamask.io/).
+The deleteName function allows users to remove a specific name from the "names" array. It takes a string parameter _name and iterates through the array to find a match. If a match is found, the function shifts all subsequent elements one position to the left to overwrite the matched name. Finally, it uses the pop function to remove the last element from the array, effectively deleting the target name.
 
-- **Hardhat**: Hardhat is a development environment and testing framework for Ethereum smart contracts. It provides tools for compiling, deploying, and testing contracts. Hardhat is used to compile and deploy the Bank smart contract in this project. [Discover Hardhat](https://hardhat.org/).
+index.js
 
-Feel free to explore the provided links to learn more about each technology. 🚀
+It is a React component that interacts with a Solidity smart contract. It allows users to perform various actions on a list of names stored in the contract. The component displays an input field and a button for adding a name to the list, an input field and a button for deleting a name from the list, and buttons for retrieving all names and deleting all names.
 
-## Installation ⬇️
+When a user adds a name, the component calls the setName function of the contract and sends a transaction to add the name to the list. When a user deletes a name, the component calls the deleteName function of the contract and sends a transaction to remove the specified name from the list.
 
-### Follow these steps to get the project up and running 🏗️
+The component also includes functions for retrieving all names from the contract and deleting all names from the contract. These functions call the corresponding contract functions and update the state of the component with the retrieved names or an empty list, respectively.
 
-1. Download or clone the project.
-2. Install the dependencies by running `npm install`.
-3. Start the local blockchain using Hardhat by running `npx hardhat node`.
-4. Open new terminal and deploy the Bank contract `npx hardhat run --network localhost scripts/deploy.js`.
-5. Start the development server by running `npm run dev`.
+The component uses React's useState hook to manage the state of the contract instance, input fields, and the list of names. It also utilizes the useEffect hook to initialize the contract instance when the component is mounted.
 
-### Configure MetaMask to use the Hardhat node 🦊
+deploy.js
 
-1. Open the MetaMask extension in your browser.
-2. Click on the account icon in the top right corner and select "Settings".
-3. In the "Networks" tab, click on "Add Network".
-4. Fill in the following details:
-   - Network Name: hardhat-test-network
-   - RPC URL: http://127.0.0.1:8545/
-   - Chain ID: 31337
-   - Currency Symbol: GO or ETH
-5. Click on "Save" to add the Hardhat network to MetaMask.
-
-### Add accounts using private keys by Hardhat for testing 🔑
-
-1. In the MetaMask extension, click on the account icon in the top right corner.
-2. Select "Import Account" or "Import Account using Private Key" (depending on your version of MetaMask).
-3. In the "Private Key" field, enter one of the private keys provided by Hardhat.
-   - To access the list of private keys, open the terminal where you started the Hardhat local network.
-   - The private keys are displayed as part of the accounts generated by Hardhat.
-4. Click on "Import" to import the account into MetaMask.
-5. Repeat the above steps to add more accounts for testing purposes.
-
-> If you need detailed instructions or visual guidance, you can refer to this step-by-step guide on [how to use MetaMask with a Hardhat node](https://support.chainstack.com/hc/en-us/articles/4408642503449-Using-MetaMask-with-a-Hardhat-node).
-
-
-## Usage 🪜
-
-**To use the application, follow these instructions:**
-
-1. After connecting MetaMask to the Hardhat local network, connect your wallet with the application
-2. Click on Transfer Funds and fill in the recipient's address and the amount you want to transfer.
-3. Click the "Transfer" button to initiate the transaction.
-4. Confirm the transaction in MetaMask.
-5. The transaction details will be logged to the console, and the account balance will be updated.
-
-**You can also personalize your account name:**
-
-1. Enter a new name in the input field.
-2. Click the "Update Name" button to set the new account name.
-3. Confirm the transaction in MetaMask.
-4. The account name will be updated, and the change will be reflected in the account details.
-
-## Contract Details 🔗
-
-The smart contract used in this project is named `Bank` present inside the `contracts/Bank.sol` file. It allows users to set an account name and transfer funds. The contract emits events for successful transfers and name updates.
-
-## Configuration ⚙️
-
-The `hardhat.config.js` file is used for configuring the Hardhat development environment. It specifies the Solidity version and required libraries to deploy contracts on the hardhat node.
-
-## Scripts 📜
-
-The `deploy.js` script, located in the `scripts` folder, is used to deploy the Bank contract. It uses Hardhat's `ethers` library to interact with the blockchain. This script is executed with the `npx hardhat run` command.
-
----
-
-This project is open-source !😉
+It is a JavaScript script that uses Hardhat and ethers.js to compile and deploy a Solidity contract. It follows these steps:
+Imports the necessary libraries from Hardhat and ethers.js.
+Defines an asynchronous function called main().
+Compiles the Solidity contract using ethers.getContractFactory().
+Deploys the contract using the contract factory's deploy() function and stores the deployed instance in a variable.
+Waits for the contract to be mined and deployed by using the deployed() function.
+Logs the deployed contract's address to the console.
+Calls the main() function, handles errors, and exits the process
