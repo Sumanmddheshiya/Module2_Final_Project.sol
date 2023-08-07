@@ -6,6 +6,9 @@ Create a simple contract with 2-3 functions. Then show the values of those funct
 License This contract is using the MIT License.
 
 Prerequisites Solidity ^0.8.0
+This example demonstrates a simple contract with two functions: setValue and getValue. The frontend allows you to set a new value and display the current value from the contract.
+
+Remember to replace 'YOUR_CONTRACT_ADDRESS' and contractABI with the actual contract address and ABI.
 
 Contract Details 
 
