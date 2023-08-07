@@ -1,57 +1,32 @@
 //code here is used of javascript for implementing and triggering functions on the frontend
+// app.js
+const contractAddress = 'YOUR_CONTRACT_ADDRESS'; // Replace with the actual contract address
+const contractABI = [...]; // Replace with the actual ABI of the contract
+
+const web3 = new Web3(Web3.givenProvider);
+const simpleContract = new web3.eth.Contract(contractABI, contractAddress);
+
+const valueElement = document.getElementById('value');
+const newValueInput = document.getElementById('newValue');
+const setValueButton = document.getElementById('setValueButton');
+
+async function updateValue() {
+    const value = await simpleContract.methods.getValue().call();
+    valueElement.textContent = value;
+}
+
+async function setValue() {
+    const newValue = newValueInput.value;
+    await simpleContract.methods.setValue(newValue).send({ from: web3.eth.defaultAccount });
+    await updateValue();
+}
+
+setValueButton.addEventListener('click', setValue);
 
 window.addEventListener('load', async () => {
-    if (window.ethereum) 
-    {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
-    }
-    else if (window.web3) 
-    {
-      window.web3 = new Web3(window.web3.currentProvider);
-    }
-    else 
-    {
-      console.log('Non-Ethereum');
-    }
-    const contractABI = [
-      {
-        "constant": false,
-        "inputs": [],
-        "name": "incrementCryptocurrency",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
+    // Prompt user to connect their wallet
+    await window.ethereum.enable();
+    web3.eth.defaultAccount = (await web3.eth.getAccounts())[0];
 
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "getCryptocurrency",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ];
-
-    const contractAddress = '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4'; 
-    //address here is used of online REMIX IDE
-
-    const contractInstance = new web3.eth.Contract(contractABI, contractAddress);
-
-    window.incrementCryptocurrency = async () => {
-      await contractInstance.methods.incrementCryptocurrency().send({ from: web3.eth.defaultAccount });
-    };
-
-    window.getCryptocurrency = async () => {
-      const value = await contractInstance.methods.getCryptocurrency().call();
-      document.getElementById('currentValue').innerText = value;
-    };
-  });
+    await updateValue();
+});
